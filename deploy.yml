@@ -1,0 +1,31 @@
+---
+- name: Deploy Docker Container
+  hosts: worker
+  become: yes
+
+  tasks:
+
+    - name: Remove existing container
+      docker_container:
+        name: spring-container
+        state: absent
+      ignore_errors: yes
+
+    - name: Remove existing image
+      docker_image:
+        name: maitra2517/movie-springboot-project
+        state: absent
+      ignore_errors: yes
+
+    - name: Pull image from DockerHub
+      docker_image:
+        name: maitra2517/movie-springboot-project
+        source: pull
+
+    - name: Run container
+      docker_container:
+        name: spring-container
+        image: maitra2517/movie-springboot-project
+        state: started
+        ports:
+          - "8085:8085"
