@@ -13,7 +13,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'https://github.com/Maitra-Biradar/Movie_Crud-Spring_Boot-master.git'
+                git branch: 'main', url: 'https://github.com/Maitra-Biradar/Movie_Crud-Spring_Boot-master.git'
             }
         }
 
